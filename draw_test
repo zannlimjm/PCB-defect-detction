@@ -1,0 +1,43 @@
+# Python program to explain cv2.circle() method
+   
+# importing cv2
+import cv2
+   
+# Reading an image in default mode
+image = cv2.imread('/Users/zannlim/Desktop/PCB_CV/thermal_test.jpg')
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+blurred = cv2.GaussianBlur(gray, (11, 11), 0)
+thresh = cv2.threshold(blurred, 175, 255, cv2.THRESH_BINARY)[1] #175 value can change, it picks up the range of value u want
+thresh = cv2.erode(thresh, None, iterations=2)
+thresh = cv2.dilate(thresh, None, iterations=4)   
+# Window name in which image is displayed
+window_name = 'Image'
+  
+# Center coordinates
+center_coordinates = (1600, 2300)
+ 
+# Radius of circle
+radius = 200
+  
+# Blue color in BGR
+color = (0, 255, 0)
+  
+# Line thickness of 2 px
+thickness = 10
+  
+# Using cv2.circle() method
+# Draw a circle with blue line borders of thickness of 2 px
+cv2.circle(image, center_coordinates, radius, color, thickness)
+# cv2.putText(im,'Moth Detected',(x+w+10,y+h),0,0.3,(0,255,0))
+  
+# Displaying the image
+cv2.imshow(window_name, image)
+
+# waitKey() waits for a key press to close the window and 0 specifies indefinite loop
+cv2.waitKey(0)
+
+# cv2.destroyAllWindows() simply destroys all the windows we created.
+cv2.destroyAllWindows()
+
+# # The function cv2.imwrite() is used to write an image.
+# cv2.imwrite(window_name, image)
